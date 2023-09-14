@@ -3,12 +3,27 @@ import { moneyFormat, digitOnly } from "@/mask";
 import { Alert, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { axios } from "../../api/http";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const [totalPrice, setTotalPrice] = useState("");
   const [money, setMoney] = useState(null);
+  const [results, setResults] = useState(null);
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    axios
+      .post(`/create-money-change`, {
+        totalPrice: parseInt(totalPrice),
+        money: parseInt(money),
+      })
+      .then(({ data }) => {
+        setResults(data);
+        toast.success("Sucesso ao calcular o troco.");
+      })
+      .catch(() => {
+        toast.error("Ocorreu um erro inesperado.");
+      });
+  };
 
   return (
     <>
@@ -29,7 +44,9 @@ const Page = () => {
           value={moneyFormat(money || 0)}
         />
         <Button
-          disabled={!totalPrice || !money}
+          disabled={
+            parseInt(totalPrice) > parseInt(money) || !totalPrice || !money
+          }
           className="pl-2 pr-2"
           size="small"
           color="primary"
@@ -45,9 +62,18 @@ const Page = () => {
           <br />
           <b>O valor em dinheiro entregue ao caixa: {moneyFormat(money)}</b>
           <br />
-          <b>O valor do troco: {moneyFormat(money)}</b>
-          <br />
-          <b>A quantidade notas de cada tipo :</b>
+          {results && (
+            <div>
+              <b>O valor do troco: {moneyFormat(results.totalChange)}</b>
+              <br />
+              <b>
+                A quantidade notas de cada tipo: <br />
+                Quantidade de notas de um real = {results.oneAmount} <br />
+                Quantidade de notas de dez reais = {results.tenAmount} <br />
+                Quantidade de notas de cem reais = {results.hundredAmount}
+              </b>
+            </div>
+          )}
         </Alert>
       </div>
     </>

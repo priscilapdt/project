@@ -14,16 +14,18 @@ import ListItemText from "@mui/material/ListItemText";
 import { ThemeProvider } from "@material-tailwind/react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import HomeIcon from "@mui/icons-material/Home";
+import ChecklistIcon from "@mui/icons-material/Checklist";
+import { ListItemIcon } from "@mui/material";
 import "./globals.css";
 const DRAWER_WIDTH = 240;
 
 const LINKS = [
-  { text: "Início", href: "/" },
-  { text: "Exercício 01", href: "/exercise-1" },
-  { text: "Exercício 02", href: "/exercise-2" },
-  { text: "Exercício 03", href: "/exercise-3" },
-  { text: "Exercício 04", href: "/exercise-4" },
+  { text: "Início", href: "/", icon: HomeIcon },
+  { text: "Exercício 01", href: "/exercise-1", icon: ChecklistIcon },
+  { text: "Exercício 02", href: "/exercise-2", icon: ChecklistIcon },
+  { text: "Exercício 03", href: "/exercise-3", icon: ChecklistIcon },
+  { text: "Exercício 04", href: "/exercise-4", icon: ChecklistIcon },
 ];
 
 export default function RootLayout({ children }) {
@@ -48,9 +50,7 @@ export default function RootLayout({ children }) {
                 noWrap
                 component="div"
               >
-                {LINKS.find((item) => {
-                  return window.location.pathname === item.href;
-                })?.text || "Bem vindo"}
+                Bem vindo
               </Typography>
             </Toolbar>
           </AppBar>
@@ -71,9 +71,16 @@ export default function RootLayout({ children }) {
           >
             <Divider />
             <List>
-              {LINKS.map(({ text, href }) => (
-                <ListItem key={href} disablePadding>
+              {LINKS.map(({ text, href, icon: Icon }) => (
+                <ListItem
+                  className="hover:bg-gray-300"
+                  key={href}
+                  disablePadding
+                >
                   <ListItemButton component={Link} href={href}>
+                    <ListItemIcon>
+                      <Icon />
+                    </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItemButton>
                 </ListItem>

@@ -11,15 +11,17 @@ const Page = () => {
 
   const handleSubmit = () => {
     axios
-      .post(`/get-palindrome`, {
-        initialValue: parseInt(initialNumber),
-        finalValue: parseInt(finalNumber),
+      .get(`/palindrome`, {
+        params: {
+          initialValue: parseInt(initialNumber),
+          finalValue: parseInt(finalNumber),
+        },
       })
       .then(({ data }) => {
         setResults(data?.items);
         toast.success("Sucesso ao encontrar os números palíndromos.");
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Ocorreu um erro inesperado.");
       });
   };
@@ -35,13 +37,25 @@ const Page = () => {
         <TextField
           label="Digite um número inicial"
           type="number"
-          onChange={(e) => setInitialNumber(e.target.value)}
+          onChange={(e) =>
+            setInitialNumber(
+              (e.target.value = Math.max(0, parseInt(e.target.value))
+                .toString()
+                .slice(0))
+            )
+          }
           value={initialNumber}
         />
         <TextField
           label="Digite um número final"
           type="number"
-          onChange={(e) => setFinalNumber(e.target.value)}
+          onChange={(e) =>
+            setFinalNumber(
+              (e.target.value = Math.max(0, parseInt(e.target.value))
+                .toString()
+                .slice(0))
+            )
+          }
           value={finalNumber}
         />
         <Button
@@ -61,7 +75,7 @@ const Page = () => {
         </Button>
       </div>
       {results && (
-        <div className="mt-6">
+        <div className="mt-6 w-96">
           <Alert icon={false} severity="info">
             <p>
               Os números palíndromos encontrados entre {initialNumber} e{" "}
