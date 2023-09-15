@@ -16,6 +16,11 @@ git clone git@github.com:priscilapdt/project.git
 # Iniciando a aplicação
 
 ## 💻 Frontend
+
+Na pasta frontend execute o comando para selecionar a versão correta do node:
+```
+nvm use
+```
 Na pasta frontend instale as dependências:
 ```
 npm install
@@ -26,6 +31,11 @@ Para iniciar a aplicação execute o comando:
 ```
 
 ## 💻 Backend
+
+Na pasta backend execute o comando para selecionar a versão correta do node:
+```
+nvm use
+```
 
 Na pasta backend instale as dependências:
 ```
