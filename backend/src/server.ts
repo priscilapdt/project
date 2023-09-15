@@ -25,3 +25,5 @@ route.post("/create-vehicle", vehicleController.post);
 app.use(route);
 
 app.listen(3001, () => "server running on port 3001");
+
+export default app;

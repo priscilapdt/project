@@ -18,7 +18,7 @@ const Page = () => {
         },
       })
       .then(({ data }) => {
-        setResults(data?.items);
+        setResults(data);
         toast.success("Sucesso ao encontrar os números palíndromos.");
       })
       .catch(() => {
@@ -78,11 +78,11 @@ const Page = () => {
         <div className="mt-6 w-96">
           <Alert icon={false} severity="info">
             <p>
-              Os números palíndromos encontrados entre {initialNumber} e{" "}
-              {finalNumber} são:
+              Os números palíndromos encontrados entre {results.initialValue} e{" "}
+              {results.finalValue} são:
             </p>
             <ul>
-              {results.map((item) => (
+              {results.items.map((item) => (
                 <li>{item}</li>
               ))}
             </ul>

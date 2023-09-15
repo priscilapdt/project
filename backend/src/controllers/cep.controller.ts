@@ -4,22 +4,26 @@ import { Request, Response } from "express";
 
 export default class CepController {
   static get = async (req: Request, res: Response) => {
-    const params: {
-      cepOne: string;
-      cepTwo: string;
-      cepThree: string;
-      cepFour: string;
-      cepFive: string;
-    } = req.query as any;
+    try {
+      const params: {
+        cepOne: string;
+        cepTwo: string;
+        cepThree: string;
+        cepFour: string;
+        cepFive: string;
+      } = req.query as any;
 
-    const resultsCep = await Promise.all(
-      Object.entries(params).map(async ([key, value]) => {
-        return [key, await this.searchCep(value)];
-      })
-    );
+      const resultsCep = await Promise.all(
+        Object.entries(params).map(async ([key, value]) => {
+          return [key, await this.searchCep(value)];
+        })
+      );
 
-    const resultsCepObject = Object.fromEntries(resultsCep);
-    res.json(resultsCepObject);
+      const resultsCepObject = Object.fromEntries(resultsCep);
+      return res.json(resultsCepObject);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
   };
 
   static searchCep = async (cep: string): Promise<Cep | undefined> => {
@@ -39,8 +43,8 @@ export default class CepController {
 
     return {
       cepNumber: cep,
-      adress: data.logradouro,
-      neighborhood: data.bairro,
+      address: data.logradouro || "N/E",
+      neighborhood: data.bairro || "N/E",
       city: data.localidade,
       state: data.uf,
     } as Cep;

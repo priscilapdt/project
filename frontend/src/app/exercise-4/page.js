@@ -49,7 +49,7 @@ const Page = () => {
           <div className="flex w-80 ml-5">
             <Alert icon={false} severity="info">
               <b>
-                Rua: {results.cepOne.adress}
+                Rua: {results.cepOne.address}
                 <br />
                 Bairro: {results.cepOne.neighborhood}
                 <br />
@@ -73,7 +73,7 @@ const Page = () => {
           <div className="flex w-80 ml-5">
             <Alert icon={false} severity="info">
               <b>
-                Rua: {results.cepTwo.adress}
+                Rua: {results.cepTwo.address}
                 <br />
                 Bairro: {results.cepTwo.neighborhood}
                 <br />
@@ -97,7 +97,7 @@ const Page = () => {
           <div className="flex w-80 ml-5">
             <Alert icon={false} severity="info">
               <b>
-                Rua: {results.cepThree.adress}
+                Rua: {results.cepThree.address}
                 <br />
                 Bairro: {results.cepThree.neighborhood}
                 <br />
@@ -121,7 +121,7 @@ const Page = () => {
           <div className="flex w-80 ml-5">
             <Alert icon={false} severity="info">
               <b>
-                Rua: {results.cepFour.adress}
+                Rua: {results.cepFour.address}
                 <br />
                 Bairro: {results.cepFour.neighborhood}
                 <br />
@@ -145,7 +145,7 @@ const Page = () => {
           <div className="flex w-80 ml-5">
             <Alert icon={false} severity="info">
               <b>
-                Rua: {results.cepFive.adress}
+                Rua: {results.cepFive.address}
                 <br />
                 Bairro: {results.cepFive.neighborhood}
                 <br />

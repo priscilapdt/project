@@ -57,12 +57,15 @@ const Page = () => {
         </Button>
       </div>
       <div className="mt-6 w-full ">
-        <Alert icon={false} severity="info">
-          <b>O valor da compra: {moneyFormat(totalPrice)} </b>
-          <br />
-          <b>O valor em dinheiro entregue ao caixa: {moneyFormat(money)}</b>
-          <br />
-          {results && (
+        {results && (
+          <Alert icon={false} severity="info">
+            <b>O valor da compra: {moneyFormat(results.totalPrice)} </b>
+            <br />
+            <b>
+              O valor em dinheiro entregue ao caixa:{" "}
+              {moneyFormat(results.money)}
+            </b>
+            <br />
             <div>
               <b>O valor do troco: {moneyFormat(results.totalChange)}</b>
               <br />
@@ -73,8 +76,8 @@ const Page = () => {
                 Quantidade de notas de cem reais = {results.hundredAmount}
               </b>
             </div>
-          )}
-        </Alert>
+          </Alert>
+        )}
       </div>
     </>
   );
